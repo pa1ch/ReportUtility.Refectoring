@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Xrm.ReportUtility.Infrastructure.Transformers;
 using Xrm.ReportUtility.Models;
 
-namespace Xrm.ReportUtility.Infrastructure
+namespace Xrm.ReportUtility.Infrastructure.Builders
 {
     public class ReportBuilder 
     {
@@ -43,23 +42,23 @@ namespace Xrm.ReportUtility.Infrastructure
                 for (var i = 0; i < report.Data.Length; i++)
                 {
                     var res = GetDataRow(report.Data[i]);
-                    var dataParams = new string[res.Length+1];
+                    var dataParams = new string[res.Length + 1];
                     dataParams[0] = (i + 1).ToString();
-                    for(var j = 0; j < res.Length; j++)
+                    for (var j = 0; j < res.Length; j++)
                     {
                         dataParams[j + 1] = res[j];
                     }
-                       
+
                     Console.WriteLine(GetRowTemplate(), dataParams);
                 }
-                
-                if (report.Rows != null && report.Rows.Any())
+            }
+
+            if (report.Rows != null && report.Rows.Any())
+            {
+                Console.WriteLine("Итого:");
+                foreach (var reportRow in report.Rows)
                 {
-                    Console.WriteLine("Итого:");
-                    foreach (var reportRow in report.Rows)
-                    {
-                        Console.WriteLine("  {0,-20}\t{1}", reportRow.Name, reportRow.Value);
-                    }
+                    Console.WriteLine("  {0,-20}\t{1}", reportRow.Name, reportRow.Value);
                 }
             }
         }

@@ -1,6 +1,6 @@
 ﻿using Xrm.ReportUtility.Interfaces;
 
-namespace Xrm.ReportUtility.Infrastructure
+namespace Xrm.ReportUtility.Infrastructure.Builders
 {
     public class HeaderRowBuilder : IRowBuilder
     {

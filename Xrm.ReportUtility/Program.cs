@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Xrm.ReportUtility.Infrastructure;
+using Xrm.ReportUtility.Infrastructure.Builders;
 using Xrm.ReportUtility.Interfaces;
 using Xrm.ReportUtility.Models;
 using Xrm.ReportUtility.Services;

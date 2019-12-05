@@ -48,14 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastructure\DataRowBuilder.cs" />
-    <Compile Include="Infrastructure\HeaderRowBuilder.cs" />
-    <Compile Include="Infrastructure\PrintReportDirector.cs" />
-    <Compile Include="Infrastructure\ReportBuilder.cs" />
+    <Compile Include="Infrastructure\Builders\DataRowBuilder.cs" />
+    <Compile Include="Infrastructure\Builders\HeaderRowBuilder.cs" />
+    <Compile Include="Infrastructure\Builders\PrintReportDirector.cs" />
+    <Compile Include="Infrastructure\Builders\ReportBuilder.cs" />
+    <Compile Include="Infrastructure\Builders\RowBuilderDirector.cs" />
+    <Compile Include="Infrastructure\Builders\RowTemplateBuilder.cs" />
     <Compile Include="Infrastructure\Transformers\Abstract\ReportServiceTransformerBase.cs" />
     <Compile Include="Infrastructure\Transformers\DataTransformer.cs" />
-    <Compile Include="Infrastructure\Transformers\RowBuilderDirector.cs" />
-    <Compile Include="Infrastructure\Transformers\RowTemplateBuilder.cs" />
     <Compile Include="Infrastructure\Transformers\VolumeSumReportTransformer.cs" />
     <Compile Include="Infrastructure\Transformers\WeightSumReportTransfomer.cs" />
     <Compile Include="Infrastructure\Transformers\CostSumReportTransformer.cs" />
@@ -82,7 +82,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Files\table.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

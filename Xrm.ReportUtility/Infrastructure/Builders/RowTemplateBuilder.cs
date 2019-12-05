@@ -1,7 +1,6 @@
-﻿using System.Runtime.InteropServices;
-using Xrm.ReportUtility.Interfaces;
+﻿using Xrm.ReportUtility.Interfaces;
 
-namespace Xrm.ReportUtility.Infrastructure.Transformers
+namespace Xrm.ReportUtility.Infrastructure.Builders
 {
     public class RowTemplateBuilder : IRowBuilder
     {

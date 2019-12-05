@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
-using Xrm.ReportUtility.Interfaces;
+﻿using Xrm.ReportUtility.Interfaces;
 using Xrm.ReportUtility.Models;
 
-namespace Xrm.ReportUtility.Infrastructure.Transformers
+namespace Xrm.ReportUtility.Infrastructure.Builders
 {
     public class RowBuilderDirector
     {
