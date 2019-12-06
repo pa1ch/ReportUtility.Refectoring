@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Xrm.ReportUtility.Infrastructure.Transformers;
 using Xrm.ReportUtility.Models;
 
 namespace Xrm.ReportUtility.Infrastructure.Builders

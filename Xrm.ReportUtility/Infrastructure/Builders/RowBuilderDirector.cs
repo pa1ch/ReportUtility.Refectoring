@@ -3,11 +3,10 @@ using Xrm.ReportUtility.Models;
 
 namespace Xrm.ReportUtility.Infrastructure.Builders
 {
-    public class RowBuilderDirector
+    public class RowBuilderDirector : IRowBuilderDirector
     {
         private readonly ReportConfig config;
         private IRowBuilder builder;
-        private string result;
         
         public RowBuilderDirector(ReportConfig config)
         {

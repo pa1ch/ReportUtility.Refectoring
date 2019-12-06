@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Xrm.ReportUtility.Infrastructure;
 using Xrm.ReportUtility.Interfaces;
@@ -8,19 +9,24 @@ namespace Xrm.ReportUtility.Services
 {
     public abstract class ReportServiceBase : IReportService
     {
-        private readonly string[] _args;
+        private readonly ReportServiceBase nextHandler;
 
-        protected ReportServiceBase(string[] args)
+        protected readonly string[] args;
+        public abstract string extension { get; }
+
+        protected ReportServiceBase(string[] args, ReportServiceBase nextHandler)
         {
-            _args = args;
+            this.args = args;
+            this.nextHandler = nextHandler;
         }
 
         public Report CreateReport()
         {
             var config = ParseConfig();
+            CheckForWarning(config);
             var dataTransformer = DataTransformerCreator.CreateTransformer(config);
 
-            var fileName = _args[0];
+            var fileName = args[0];
             var text = File.ReadAllText(fileName);
             var data = GetDataRows(text);
             return dataTransformer.TransformData(data);
@@ -30,24 +36,39 @@ namespace Xrm.ReportUtility.Services
         {
             return new ReportConfig
             {
-                WithData = _args.Contains("-data"),
+                WithData = args.Contains("-data"),
 
-                WithIndex = _args.Contains("-withIndex"),
-                WithTotalVolume = _args.Contains("-withTotalVolume"),
-                WithTotalWeight = _args.Contains("-withTotalWeight"),
+                WithIndex = args.Contains("-withIndex"),
+                WithTotalVolume = args.Contains("-withTotalVolume"),
+                WithTotalWeight = args.Contains("-withTotalWeight"),
                 
-                WithoutVolume = _args.Contains("-withoutVolume"),
-                WithoutWeight = _args.Contains("-withoutWeight"),
-                WithoutCost = _args.Contains("-withoutCost"),
-                WithoutCount = _args.Contains("-withoutCount"),
+                WithoutVolume = args.Contains("-withoutVolume"),
+                WithoutWeight = args.Contains("-withoutWeight"),
+                WithoutCost = args.Contains("-withoutCost"),
+                WithoutCount = args.Contains("-withoutCount"),
 
-                VolumeSum = _args.Contains("-volumeSum"),
-                WeightSum = _args.Contains("-weightSum"),
-                CostSum = _args.Contains("-costSum"),
-                CountSum = _args.Contains("-countSum")
+                VolumeSum = args.Contains("-volumeSum"),
+                WeightSum = args.Contains("-weightSum"),
+                CostSum = args.Contains("-costSum"),
+                CountSum = args.Contains("-countSum")
             };
         }
 
-        protected abstract DataRow[] GetDataRows(string text);
+        private void CheckForWarning(ReportConfig config)
+        {
+            if ((config.WithIndex || config.WithTotalVolume || config.WithTotalWeight) && !config.WithData)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("WARNING");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+
+        }
+
+        protected virtual DataRow[] GetDataRows(string text)
+        {
+            nextHandler?.GetDataRows(text);
+            throw new NotSupportedException("this extension not supported");
+        }
     }
 }

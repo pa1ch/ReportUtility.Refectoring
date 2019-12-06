@@ -1,9 +1,7 @@
-﻿using System.Net;
-using Xrm.ReportUtility.Infrastructure.Transformers;
-using Xrm.ReportUtility.Interfaces;
+﻿using Xrm.ReportUtility.Interfaces;
 using Xrm.ReportUtility.Models;
 
-namespace Xrm.ReportUtility.Infrastructure
+namespace Xrm.ReportUtility.Infrastructure.Builders
 {
     public class DataRowBuilder : IRowBuilder
     {
